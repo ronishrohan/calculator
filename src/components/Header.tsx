@@ -1,7 +1,6 @@
-
 import { useEffect, useState } from "react";
 import { icons } from "../util/icons";
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 
 const title: string = "calculator";
 
@@ -11,14 +10,14 @@ function Header() {
     setWidth(window.innerWidth);
     window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
-    })
-    console.log(width)
-  }, [])
+    });
+    console.log(width);
+  }, []);
   useEffect(() => {
-    console.log( Math.floor(width/90))
-  }, [width])
+    console.log(Math.floor(width / 90));
+  }, [width]);
   return (
-    <header className="flex-col h-[105px]">
+    <header className="flex-col h-[100px]">
       <motion.div
         initial={{
           borderBottomLeftRadius: "50%",
@@ -76,45 +75,49 @@ function Header() {
         </motion.a>
       </motion.div>
       <motion.div
-        initial={{ y: -10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 2.2, duration: 1.2, type: "tween", ease: "anticipate" }}
+        initial={{ y: "-100%", visibility: "hidden" }}
+        animate={{ y:0, visibility: "visible" }}
+        transition={{
+          delay: 2.2,
+          duration: 1.2,
+          type: "tween",
+          ease: "anticipate",
+        }}
         className="h-[15px] z-0 bg-orange-500 overflow-hidden relative flex w-max min-w-full items-center overflow-hidden"
       >
         <motion.span
-          initial={{x:"100%"}}
+          initial={{ x: "100%" }}
           animate={{ x: "-100%" }}
           transition={{
             repeat: Infinity,
             repeatType: "loop",
             ease: "linear",
             type: "tween",
-            duration: width/30
+            duration: width / 30,
           }}
-          className="text-[15px] font-black leading-[15px] w-full absolute"
+          className="text-[15px] flex justify-between font-black leading-[15px] w-full absolute"
         >
-          {new Array(Math.floor(width/60)).fill(null).map((_, index) => {
-            return <span className="ml-5" >demo</span>
+          {new Array(Math.floor(width / 60)).fill(null).map((_, index) => {
+            return <span>demo</span>;
           })}
         </motion.span>
         <motion.span
-          initial={{x:"100%"}}
+          initial={{ x: "100%" }}
           animate={{ x: "-100%" }}
           transition={{
             repeat: Infinity,
             repeatType: "loop",
             ease: "linear",
             type: "tween",
-            duration: width/30,
-            delay: width/60
+            duration: width / 30,
+            delay: width / 60,
           }}
-          className="text-[15px] font-black leading-[15px] w-full absolute"
+          className="text-[15px] flex justify-between font-black leading-[15px] w-full absolute"
         >
-          {new Array(Math.floor(width/60)).fill(null).map((_, index) => {
-            return <span className="ml-5" >demo</span>
+          {new Array(Math.floor(width / 60)).fill(null).map((_, index) => {
+            return <span>demo</span>;
           })}
         </motion.span>
-        
       </motion.div>
     </header>
   );
