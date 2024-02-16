@@ -1,9 +1,122 @@
+import { useEffect, useState } from "react";
+import { icons } from "../util/icons";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
+const title: string = "calculator";
 
 function Header() {
+  const [width, setWidth] = useState<number>(window.innerWidth);
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
+    })
+    console.log(width)
+  }, [])
+  useEffect(() => {
+    console.log( Math.floor(width/90))
+  }, [width])
   return (
-    <div className="text-white" >test</div>
-  )
+    <header className="flex-col h-[105px]">
+      <motion.div
+        initial={{
+          borderBottomLeftRadius: "50%",
+          borderBottomRightRadius: "50%",
+          y: "-100%",
+        }}
+        animate={{
+          y: 0,
+          borderBottomLeftRadius: "0%",
+          borderBottomRightRadius: "0%",
+        }}
+        transition={{
+          duration: 1.4,
+          type: "tween",
+          ease: [0.85, 0, 0.15, 1],
+        }}
+        className="bg-[#161616] z-10 relative w-full h-[85px] overflow-hidden flex text-white font items-center p-5 justify-between"
+      >
+        <div className="flex text-3xl font-extrabold overflow-hidden leading-[1.8rem]">
+          {title.split("").map((char, index) => {
+            return (
+              <motion.span
+                initial={{ y: "120%" }}
+                animate={{ y: "0%" }}
+                transition={{
+                  delay: 0.4 + 0.03 * index,
+                  duration: 2,
+                  type: "tween",
+                  ease: [0.85, 0, 0.15, 1],
+                }}
+                key={index}
+              >
+                {char}
+              </motion.span>
+            );
+          })}
+          <motion.span
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 2.2 }}
+            className="text-orange-500"
+          >
+            .
+          </motion.span>
+        </div>
+        <motion.a
+          href="https://github.com/ronishrohan"
+          target="_blank"
+          className="cursor-pointer bg-black p-2 px-4 rounded-3xl flex gap-3 items-center border-2 border-transparent hover:border-white transition-all duration-75"
+        >
+          <span className="text-sm font-bold">github</span>
+          <span className="text-2xl items-center text-center flex">
+            {icons.github}
+          </span>
+        </motion.a>
+      </motion.div>
+      <motion.div
+        initial={{ y: -10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 2, duration: 0.4, type: "tween" }}
+        className="h-[15px] z-0 bg-orange-500 overflow-hidden relative flex w-max min-w-full items-center overflow-hidden"
+      >
+        <motion.span
+          initial={{x:"100%"}}
+          animate={{ x: "-100%" }}
+          transition={{
+            repeat: Infinity,
+            repeatType: "loop",
+            ease: "linear",
+            type: "tween",
+            duration: width/40
+          }}
+          className="text-[15px] font-black leading-[15px] w-full absolute"
+        >
+          {new Array(Math.floor(width/60)).fill(null).map((_, index) => {
+            return <span className="ml-5" >demo</span>
+          })}
+        </motion.span>
+        <motion.span
+          initial={{x:"100%"}}
+          animate={{ x: "-100%" }}
+          transition={{
+            repeat: Infinity,
+            repeatType: "loop",
+            ease: "linear",
+            type: "tween",
+            duration: width/40,
+            delay: width/80
+          }}
+          className="text-[15px] font-black leading-[15px] w-full absolute"
+        >
+          {new Array(Math.floor(width/60)).fill(null).map((_, index) => {
+            return <span className="ml-5" >demo</span>
+          })}
+        </motion.span>
+        
+      </motion.div>
+    </header>
+  );
 }
 
-export default Header
+export default Header;
