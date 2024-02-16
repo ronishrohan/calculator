@@ -1,9 +1,8 @@
 
-import { HeaderContainer } from '../linaria/elements'
 
 function Header() {
   return (
-    <HeaderContainer>Header</HeaderContainer>
+    <div>test</div>
   )
 }
 
