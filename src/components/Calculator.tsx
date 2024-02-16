@@ -4,8 +4,8 @@ import { CalculatorModel } from "./CalculatorModel";
 
 function Calculator() {
   return (
-    <Float>
-      <CalculatorModel scale={0.6}></CalculatorModel>
+    <Float floatIntensity={0.2} >
+      <CalculatorModel scale={0.3} ></CalculatorModel>
     </Float>
   );
 }
