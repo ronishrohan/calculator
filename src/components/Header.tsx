@@ -78,7 +78,7 @@ function Header() {
       <motion.div
         initial={{ y: -10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 2, duration: 0.4, type: "tween" }}
+        transition={{ delay: 2.2, duration: 1.2, type: "tween", ease: "anticipate" }}
         className="h-[15px] z-0 bg-orange-500 overflow-hidden relative flex w-max min-w-full items-center overflow-hidden"
       >
         <motion.span
@@ -89,7 +89,7 @@ function Header() {
             repeatType: "loop",
             ease: "linear",
             type: "tween",
-            duration: width/40
+            duration: width/30
           }}
           className="text-[15px] font-black leading-[15px] w-full absolute"
         >
@@ -105,8 +105,8 @@ function Header() {
             repeatType: "loop",
             ease: "linear",
             type: "tween",
-            duration: width/40,
-            delay: width/80
+            duration: width/30,
+            delay: width/60
           }}
           className="text-[15px] font-black leading-[15px] w-full absolute"
         >

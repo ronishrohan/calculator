@@ -7,8 +7,18 @@
     src: url("../assets/fonts/neue-regrade.woff2");
 }
 
+html,body,#root{
+    height: 100%;
+}
+
 body{
     background-color: #1c1c1c;
     font-family: "Neue Regrade";
+    height: 100%;
+}
 
+#root{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
