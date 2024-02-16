@@ -2,7 +2,7 @@
 
 function Header() {
   return (
-    <div>test</div>
+    <div className="text-white" >test</div>
   )
 }
 
