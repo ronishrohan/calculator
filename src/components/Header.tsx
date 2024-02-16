@@ -86,7 +86,7 @@ function Header() {
         className="h-[15px] z-0 bg-orange-500 overflow-hidden relative flex w-max min-w-full items-center overflow-hidden"
       >
         <motion.span
-          initial={{ x: "100%" }}
+          initial={{ x: "0%" }}
           animate={{ x: "-100%" }}
           transition={{
             repeat: Infinity,
@@ -103,19 +103,19 @@ function Header() {
         </motion.span>
         <motion.span
           initial={{ x: "105%" }}
-          animate={{ x: "-100%" }}
+          animate={{ x: "0%" }}
           transition={{
             repeat: Infinity,
             repeatType: "loop",
             ease: "linear",
             type: "tween",
             duration: width / 30,
-            delay: width / 60,
+            
           }}
           className="text-[15px] flex justify-between font-black leading-[15px] w-full absolute"
         >
           {new Array(Math.floor(width / 65)).fill(null).map((_, index) => {
-            return <span>demo</span>;
+            return <span>move</span>;
           })}
         </motion.span>
       </motion.div>

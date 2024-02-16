@@ -8,7 +8,7 @@ function Scene({mouse}) {
           <PerspectiveCamera makeDefault rotation={[1,0.4,50]} fov={10} position={[0,0,5]} ></PerspectiveCamera>
           <spotLight
             position={[1, 1, 2]}
-            intensity={12}
+            intensity={9}
             angle={0.5}
           ></spotLight>
           
