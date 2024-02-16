@@ -11,7 +11,7 @@ function Header() {
     window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
     });
-    console.log(width);
+
   }, []);
   useEffect(() => {
     console.log(Math.floor(width / 90));
@@ -97,12 +97,12 @@ function Header() {
           }}
           className="text-[15px] flex justify-between font-black leading-[15px] w-full absolute"
         >
-          {new Array(Math.floor(width / 60)).fill(null).map((_, index) => {
-            return <span>demo</span>;
+          {new Array(Math.floor(width / 65)).fill(null).map((_, index) => {
+            return <span>move</span>;
           })}
         </motion.span>
         <motion.span
-          initial={{ x: "100%" }}
+          initial={{ x: "105%" }}
           animate={{ x: "-100%" }}
           transition={{
             repeat: Infinity,
@@ -114,7 +114,7 @@ function Header() {
           }}
           className="text-[15px] flex justify-between font-black leading-[15px] w-full absolute"
         >
-          {new Array(Math.floor(width / 60)).fill(null).map((_, index) => {
+          {new Array(Math.floor(width / 65)).fill(null).map((_, index) => {
             return <span>demo</span>;
           })}
         </motion.span>
