@@ -1,5 +1,4 @@
 import {styled} from "@linaria/react"
-import {motion} from "framer-motion"
 
 export const HeaderContainer = styled.div`
     width: 100%;
