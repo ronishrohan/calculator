@@ -98,7 +98,7 @@ function Header() {
           className="text-[15px] flex justify-between font-black leading-[15px] w-full absolute"
         >
           {new Array(Math.floor(width / 65)).fill(null).map((_, index) => {
-            return <span>move</span>;
+            return <span key={index} >wip</span>;
           })}
         </motion.span>
         <motion.span
@@ -115,7 +115,7 @@ function Header() {
           className="text-[15px] flex justify-between font-black leading-[15px] w-full absolute"
         >
           {new Array(Math.floor(width / 65)).fill(null).map((_, index) => {
-            return <span>move</span>;
+            return <span key={index} >wip</span>;
           })}
         </motion.span>
       </motion.div>

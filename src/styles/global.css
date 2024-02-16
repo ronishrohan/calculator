@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: "Neue Regrade";
-    src: url("/public/fonts/neue-regrade.woff2");
+    src: url("/fonts/neue-regrade.woff2");
 }
 
 html,body,#root{

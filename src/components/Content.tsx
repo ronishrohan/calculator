@@ -15,12 +15,12 @@ function Content() {
       const tempX = e.clientY / window.innerHeight - 0.5;
       mouse.y.set(tempY);
       mouse.x.set(tempX);
-      console.log();
     }
     window.addEventListener("mousemove", handleMove);
 
     return () => window.removeEventListener("mousemove", handleMove);
   }, []);
+  
   const xtrans = useTransform(mouse.x, [-0.5, 0.5], [-20,20])
   const ytrans = useTransform(mouse.y, [-0.5, 0.5], [-20,20])
 

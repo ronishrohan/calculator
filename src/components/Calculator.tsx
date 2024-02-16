@@ -7,6 +7,7 @@ import { useMotionValue, useSpring } from "framer-motion";
 const config = { damping: 20 };
 
 function Calculator({ mouse }) {
+  
   return (
     <Float floatIntensity={0.2}>
       <motion.group
