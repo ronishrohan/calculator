@@ -60,38 +60,40 @@ function Button({ materials, nodes, children, op, func } :ButtonProps) {
 
   function handleClick() {
     playSound();
-    switch (op) {
-      case "clear":
-        setDisplayValue("");
-        break;
-      case "delete":
-        setDisplayValue((prev) => prev.substring(0, prev.length - 1));
-        break;
-      case "equal":
-        let res = "";
-        try {
-          res = eval(formatCalc(displayValue)).toString();
-        } catch {
-          res = "error"
-        }
-        setDisplayValue((prev) => res);
-        break;
-      case "+":
-      case "-":
-      case "^":
-      case "*":
-      case "/":
-        if (!operators.includes(displayValue.charAt(displayValue.length - 1)) && displayValue.length != 0) {
+    if(displayValue.length<8){
+      switch (op) {
+        case "clear":
+          setDisplayValue("");
+          break;
+        case "delete":
+          setDisplayValue((prev) => prev.substring(0, prev.length - 1));
+          break;
+        case "equal":
+          let res = "";
+          try {
+            res = eval(formatCalc(displayValue)).toString();
+          } catch {
+            res = "error"
+          }
+          setDisplayValue((prev) => res);
+          break;
+        case "+":
+        case "-":
+        case "^":
+        case "*":
+        case "/":
+          if (!operators.includes(displayValue.charAt(displayValue.length - 1)) && displayValue.length != 0) {
+            setDisplayValue((prev) => prev + op);
+          }
+          break;
+        case ".":
+          if(displayValue.indexOf(".") == -1){
+            setDisplayValue(prev => prev + ".")
+          }
+          break;
+        default:
           setDisplayValue((prev) => prev + op);
-        }
-        break;
-      case ".":
-        if(displayValue.indexOf(".") == -1){
-          setDisplayValue(prev => prev + ".")
-        }
-        break;
-      default:
-        setDisplayValue((prev) => prev + op);
+      }
     }
   }
   return (
