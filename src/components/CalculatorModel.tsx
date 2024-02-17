@@ -72,9 +72,6 @@ type ContextType = Record<
 export function CalculatorModel(props: JSX.IntrinsicElements["group"]) {
   const displayValue = useAtomValue(display)
   const { nodes, materials } = useGLTF("/calculator_export.glb") as GLTFResult;
-  function handleChange(func){
-    setEquation(prev => prev + func)
-  }
   return (
     <group  {...props} dispose={null}>
       <pointLight

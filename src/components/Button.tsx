@@ -9,12 +9,21 @@ import useSound from "use-sound";
 import { useAtom } from "jotai";
 import { display } from "../store/calculation";
 
+interface ButtonProps{
+  materials: unknown,
+  nodes: unknown,
+  children: string,
+  op: string,
+  func?: string
+
+}
+
 const operators = [".", "+", "-", "^", "*", "/"];
 
 const hovered = new MeshStandardMaterial({ color: "#7e7e7e" });
 const hovered_orange = new MeshStandardMaterial({ color: "#704136" });
 
-function Button({ materials, nodes, children, op, func }) {
+function Button({ materials, nodes, children, op, func } :ButtonProps) {
   const [displayValue, setDisplayValue] = useAtom(display);
   const material = children == "add" ? materials["black.001"] : materials.white;
   const material_hovered = children == "add" ? hovered_orange : hovered;
