@@ -107,7 +107,7 @@ function Button({ materials, nodes, children, op, func } :ButtonProps) {
         onClick={() => handleClick()}
         geometry={nodes[`button_${children}`].geometry}
         material={
-          children == 4
+          children == "4"
             ? materials.black
             : isHovered
             ? material_hovered
@@ -120,7 +120,7 @@ function Button({ materials, nodes, children, op, func } :ButtonProps) {
         receiveShadow
         geometry={nodes[`button_${children}_1`].geometry}
         material={
-          children == 4
+          children == "4"
             ? isHovered
               ? material_hovered
               : materials.white
