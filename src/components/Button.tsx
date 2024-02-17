@@ -10,8 +10,8 @@ import { useAtom } from "jotai";
 import { display } from "../store/calculation";
 
 interface ButtonProps{
-  materials: unknown,
-  nodes: unknown,
+  materials: any,
+  nodes: any,
   children: string,
   op: string,
   func?: string
