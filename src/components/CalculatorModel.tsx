@@ -8,6 +8,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, Text } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import Button from "./Button";
+import { useAtomValue } from "jotai";
+import { display } from "../store/calculation";
 
 
 type GLTFResult = GLTF & {
@@ -68,7 +70,7 @@ type ContextType = Record<
 >;
 
 export function CalculatorModel(props: JSX.IntrinsicElements["group"]) {
-  const [equation, setEquation] = useState("0");
+  const displayValue = useAtomValue(display)
   const { nodes, materials } = useGLTF("/calculator_export.glb") as GLTFResult;
   function handleChange(func){
     setEquation(prev => prev + func)
@@ -97,7 +99,7 @@ export function CalculatorModel(props: JSX.IntrinsicElements["group"]) {
       ></pointLight>
       <group>
         <group>
-          <Text fontSize={0.2} font="/fonts/neue-regrade-medium.otf" position={[-0.45,0.6,0.06]} anchorX={"left"} >{equation}</Text>
+          <Text fontSize={0.2} font="/fonts/neue-regrade-medium.otf" position={[-0.47,0.6,0.06]} anchorX={"left"} >{displayValue}</Text>
           <mesh
             castShadow
             receiveShadow
@@ -130,25 +132,25 @@ export function CalculatorModel(props: JSX.IntrinsicElements["group"]) {
               material={materials.black}
             />
           </motion.group> */}
-          <Button nodes={nodes} changeEquation={handleChange} op={"0"} materials={materials} >0</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"1"} materials={materials} >1</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"2"} materials={materials} >2</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"3"} materials={materials} >3</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"4"} materials={materials} >4</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"5"} materials={materials} >5</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"6"} materials={materials} >6</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"7"} materials={materials} >7</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"8"} materials={materials} >8</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"9"} materials={materials} >9</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"clear"} materials={materials} >ac</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"."} materials={materials} >decimal</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"delete"} materials={materials} >delete</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"/"} materials={materials} >divide</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"equal"} materials={materials} >equal</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"*"} materials={materials} >multiply</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"^"} materials={materials} >power</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"-"} materials={materials} >subtract</Button>
-          <Button nodes={nodes} changeEquation={handleChange} op={"add"} materials={materials} >add</Button>
+          <Button nodes={nodes} op={"0"} materials={materials} >0</Button>
+          <Button nodes={nodes} op={"1"} materials={materials} >1</Button>
+          <Button nodes={nodes} op={"2"} materials={materials} >2</Button>
+          <Button nodes={nodes} op={"3"} materials={materials} >3</Button>
+          <Button nodes={nodes} op={"4"} materials={materials} >4</Button>
+          <Button nodes={nodes} op={"5"} materials={materials} >5</Button>
+          <Button nodes={nodes} op={"6"} materials={materials} >6</Button>
+          <Button nodes={nodes} op={"7"} materials={materials} >7</Button>
+          <Button nodes={nodes} op={"8"} materials={materials} >8</Button>
+          <Button nodes={nodes} op={"9"} materials={materials} >9</Button>
+          <Button nodes={nodes} op={"clear"} materials={materials} func={"clear"} >ac</Button>
+          <Button nodes={nodes} op={"."} materials={materials} >decimal</Button>
+          <Button nodes={nodes} op={"delete"} materials={materials}  func={"delete"} >delete</Button>
+          <Button nodes={nodes} op={"/"} materials={materials} >divide</Button>
+          <Button nodes={nodes} op={"equal"} materials={materials} func={"equal"} >equal</Button>
+          <Button nodes={nodes} op={"*"} materials={materials} >multiply</Button>
+          <Button nodes={nodes} op={"^"} materials={materials} >power</Button>
+          <Button nodes={nodes} op={"-"} materials={materials} >subtract</Button>
+          <Button nodes={nodes} op={"+"} materials={materials} >add</Button>
           
         </group>
       </group>

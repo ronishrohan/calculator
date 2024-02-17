@@ -6,11 +6,16 @@ import sound2 from "/audio/2.wav";
 import sound3 from "/audio/3.wav";
 import sound4 from "/audio/4.wav";
 import useSound from "use-sound";
+import { useAtom } from "jotai";
+import { display } from "../store/calculation";
+
+const operators = [".", "+", "-", "^", "*", "/"];
 
 const hovered = new MeshStandardMaterial({ color: "#7e7e7e" });
 const hovered_orange = new MeshStandardMaterial({ color: "#704136" });
 
-function Button({ materials, nodes, children, changeEquation, op }) {
+function Button({ materials, nodes, children, op, func }) {
+  const [displayValue, setDisplayValue] = useAtom(display);
   const material = children == "add" ? materials["black.001"] : materials.white;
   const material_hovered = children == "add" ? hovered_orange : hovered;
 
@@ -26,7 +31,7 @@ function Button({ materials, nodes, children, changeEquation, op }) {
 
   const [isHovered, setHovered] = useState(false);
 
-  function handleClick() {
+  function playSound() {
     const rand = Math.random() * 4;
     if (rand <= 1) {
       playSound1();
@@ -37,19 +42,60 @@ function Button({ materials, nodes, children, changeEquation, op }) {
     } else {
       playSound4();
     }
-    changeEquation(op);
+  }
+
+  function formatCalc(display: string) {
+    const res = display.replace("^", "**");
+    return res;
+  }
+
+  function handleClick() {
+    playSound();
+    switch (op) {
+      case "clear":
+        setDisplayValue("");
+        break;
+      case "delete":
+        setDisplayValue((prev) => prev.substring(0, prev.length - 1));
+        break;
+      case "equal":
+        let res = "";
+        try {
+          res = eval(formatCalc(displayValue)).toString();
+        } catch {
+          res = "error"
+        }
+        setDisplayValue((prev) => res);
+        break;
+      case "+":
+      case "-":
+      case "^":
+      case "*":
+      case "/":
+        if (!operators.includes(displayValue.charAt(displayValue.length - 1)) && displayValue.length != 0) {
+          setDisplayValue((prev) => prev + op);
+        }
+        break;
+      case ".":
+        if(displayValue.indexOf(".") == -1){
+          setDisplayValue(prev => prev + ".")
+        }
+        break;
+      default:
+        setDisplayValue((prev) => prev + op);
+    }
   }
   return (
     <motion.group
       position={[0, 0, 0.01]}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
-      onClick={() => handleClick()}
       whileTap={{ z: -0.01 }}
     >
       <mesh
         castShadow
         receiveShadow
+        onClick={() => handleClick()}
         geometry={nodes[`button_${children}`].geometry}
         material={
           children == 4
