@@ -33,8 +33,11 @@ dependencies:
     specifier: 9.0.2
     version: 9.0.2(react-dom@18.2.0)(react@18.2.0)
   framer-motion-3d:
-    specifier: ^11.0.5
-    version: 11.0.5(@react-three/fiber@8.15.16)(react-dom@18.2.0)(react@18.2.0)(three@0.161.0)
+    specifier: 9.0.2
+    version: 9.0.2(@react-three/fiber@8.15.16)(react-dom@18.2.0)(react@18.2.0)(three@0.161.0)
+  jotai:
+    specifier: ^2.6.4
+    version: 2.6.4(@types/react@18.2.55)(react@18.2.0)
   normalize.css:
     specifier: ^8.0.1
     version: 8.0.1
@@ -50,6 +53,9 @@ dependencies:
   three-stdlib:
     specifier: ^2.29.4
     version: 2.29.4(three@0.161.0)
+  use-sound:
+    specifier: ^4.0.1
+    version: 4.0.1(react@18.2.0)
 
 devDependencies:
   '@types/react':
@@ -2066,8 +2072,8 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /framer-motion-3d@11.0.5(@react-three/fiber@8.15.16)(react-dom@18.2.0)(react@18.2.0)(three@0.161.0):
-    resolution: {integrity: sha512-QKWIXLMG422g+fpJU+dEjSBjyNY+oks1IwwSL3G1EcdqUu55lfjLSKdWJrpeE4x/ighIzNf0uizxL2hlr9AJkg==}
+  /framer-motion-3d@9.0.2(@react-three/fiber@8.15.16)(react-dom@18.2.0)(react@18.2.0)(three@0.161.0):
+    resolution: {integrity: sha512-X96+TSdKg043mC40wZrm9lzt75enHviiQCAeV2AISLT8DuvMV+75oZPN5wI1nOajLODicx0V3RKCwLcr2o5cRw==}
     peerDependencies:
       '@react-three/fiber': ^8.2.2
       react: '>=18.0'
@@ -2075,29 +2081,11 @@ packages:
       three: '>=0.133'
     dependencies:
       '@react-three/fiber': 8.15.16(react-dom@18.2.0)(react@18.2.0)(three@0.161.0)
-      framer-motion: 11.0.5(react-dom@18.2.0)(react@18.2.0)
+      framer-motion: 9.0.2(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-merge-refs: 2.1.1
       three: 0.161.0
-    dev: false
-
-  /framer-motion@11.0.5(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Lb0EYbQcSK/pgyQUJm+KzsQrKrJRX9sFRyzl9hSr9gFG4Mk8yP7BjhuxvRXzblOM/+JxycrJdCDVmOQBsjpYlw==}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-dom:
-        optional: true
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      tslib: 2.6.2
-    optionalDependencies:
-      '@emotion/is-prop-valid': 0.8.8
     dev: false
 
   /framer-motion@9.0.2(react-dom@18.2.0)(react@18.2.0):
@@ -2237,6 +2225,10 @@ packages:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
     dev: false
 
+  /howler@2.2.4:
+    resolution: {integrity: sha512-iARIBPgcQrwtEr+tALF+rapJ8qSc+Set2GJQl7xT1MQzWaVkFebdJhR3alVlSiUf5U7nAANKuj3aWpwerocD5w==}
+    dev: false
+
   /iconv-lite@0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
@@ -2365,6 +2357,22 @@ packages:
     resolution: {integrity: sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==}
     hasBin: true
     dev: true
+
+  /jotai@2.6.4(@types/react@18.2.55)(react@18.2.0):
+    resolution: {integrity: sha512-RniwQPX4893YlNR1muOtyUGHYaTD1fhEN4qnOuZJSrDHj6xdEMrqlRSN/hCm2fshwk78ruecB/P2l+NCVWe6TQ==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=17.0.0'
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      '@types/react': 18.2.55
+      react: 18.2.0
+    dev: false
 
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -3235,6 +3243,15 @@ packages:
     dependencies:
       punycode: 2.3.1
     dev: true
+
+  /use-sound@4.0.1(react@18.2.0):
+    resolution: {integrity: sha512-hykJ86kNcu6y/FzlSHcQxhjSGMslZx2WlfLpZNoPbvueakv4OF3xPxEtGV2YmculrIaH0tPp9LtG4jgy17xMWg==}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      howler: 2.2.4
+      react: 18.2.0
+    dev: false
 
   /use-sync-external-store@1.2.0(react@18.2.0):
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}

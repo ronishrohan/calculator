@@ -7,8 +7,6 @@ import * as THREE from "three";
 import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, Text } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { motion } from "framer-motion-3d";
-import { useMotionValue } from "framer-motion";
 import Button from "./Button";
 
 
@@ -150,20 +148,8 @@ export function CalculatorModel(props: JSX.IntrinsicElements["group"]) {
           <Button nodes={nodes} changeEquation={handleChange} op={"*"} materials={materials} >multiply</Button>
           <Button nodes={nodes} changeEquation={handleChange} op={"^"} materials={materials} >power</Button>
           <Button nodes={nodes} changeEquation={handleChange} op={"-"} materials={materials} >subtract</Button>
-          <group>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.button_add.geometry}
-              material={materials["black.001"]}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.button_add_1.geometry}
-              material={materials.black}
-            />
-          </group>
+          <Button nodes={nodes} changeEquation={handleChange} op={"add"} materials={materials} >add</Button>
+          
         </group>
       </group>
     </group>

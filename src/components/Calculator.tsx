@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Float } from "@react-three/drei";
 import { CalculatorModel } from "./CalculatorModel";
-import { motion } from "framer-motion-3d";
+import {motion} from "framer-motion-3d"
 import { useMotionValue, useSpring } from "framer-motion";
 
 const config = { damping: 20 };

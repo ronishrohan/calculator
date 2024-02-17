@@ -1,34 +1,76 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion-3d";
 import { MeshStandardMaterial, MeshToonMaterial } from "three";
+import sound1 from "/audio/1.wav";
+import sound2 from "/audio/2.wav";
+import sound3 from "/audio/3.wav";
+import sound4 from "/audio/4.wav";
+import useSound from "use-sound";
 
-const hovered = new MeshStandardMaterial({color: "#878787"})
+const hovered = new MeshStandardMaterial({ color: "#7e7e7e" });
+const hovered_orange = new MeshStandardMaterial({ color: "#704136" });
 
 function Button({ materials, nodes, children, changeEquation, op }) {
-  
+  const material = children == "add" ? materials["black.001"] : materials.white;
+  const material_hovered = children == "add" ? hovered_orange : hovered;
+
+  const audioConfig = {
+    volume: 0.7,
+    playbackRate: 1,
+  };
+
+  const [playSound1] = useSound(sound1, audioConfig);
+  const [playSound2] = useSound(sound2, audioConfig);
+  const [playSound3] = useSound(sound3, audioConfig);
+  const [playSound4] = useSound(sound4, audioConfig);
+
   const [isHovered, setHovered] = useState(false);
+
+  function handleClick() {
+    const rand = Math.random() * 4;
+    if (rand <= 1) {
+      playSound1();
+    } else if (rand <= 2) {
+      playSound2();
+    } else if (rand <= 3) {
+      playSound3();
+    } else {
+      playSound4();
+    }
+    changeEquation(op);
+  }
   return (
     <motion.group
       position={[0, 0, 0.01]}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
-      onClick={() => {
-        changeEquation(op)
-      }}
-      whileTap={{z:-0.01}}
+      onClick={() => handleClick()}
+      whileTap={{ z: -0.01 }}
     >
       <mesh
         castShadow
         receiveShadow
         geometry={nodes[`button_${children}`].geometry}
-        material={children == 4 ? materials.black : (isHovered ? hovered: materials.white)}
+        material={
+          children == 4
+            ? materials.black
+            : isHovered
+            ? material_hovered
+            : material
+        }
       />
 
       <mesh
         castShadow
         receiveShadow
         geometry={nodes[`button_${children}_1`].geometry}
-        material={children == 4 ? (isHovered ? hovered: materials.white) : materials.black}
+        material={
+          children == 4
+            ? isHovered
+              ? material_hovered
+              : materials.white
+            : materials.black
+        }
       />
     </motion.group>
   );
