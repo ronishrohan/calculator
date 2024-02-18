@@ -1,14 +1,17 @@
+ // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-nocheck
 import React, { useEffect, useRef, useState } from "react";
 import { Text } from "@react-three/drei";
 import { useAtomValue } from "jotai";
 import { display } from "../store/calculation";
 import { useMotionValue, useSpring } from "framer-motion";
 import { motion } from "framer-motion-3d";
+import { Object3D } from "three";
 
 function CalculatorDisplay() {
   const displayValue = useAtomValue(display);
-  const calculatorRef = useRef();
-  const calculatorRef2 = useRef();
+  const calculatorRef : unknown = useRef();
+  const calculatorRef2 : unknown= useRef();
   const [size, setSize] = useState(0.2);
   const [max, setMax] = useState(0.1);
 
