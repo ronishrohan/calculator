@@ -61,9 +61,10 @@ function Header() {
           </motion.span>
         </div>
         <motion.a
+          
           href="https://github.com/ronishrohan"
           target="_blank"
-          className="cursor-pointer bg-black p-2 px-4 rounded-3xl flex gap-3 items-center border-2 border-transparent hover:border-white transition-all duration-75"
+          className="cursor-pointer pointer-events-auto bg-black p-2 px-4 rounded-3xl flex gap-3 items-center border-2 border-transparent hover:border-white transition-all duration-75"
         >
           <span className="text-sm font-bold">github</span>
           <span className="text-2xl items-center text-center flex">
@@ -95,7 +96,7 @@ function Header() {
           className="text-[15px] flex justify-between font-black leading-[15px] w-full absolute"
         >
           {new Array(Math.floor(width / 65)).fill(null).map((_, index) => {
-            return <span key={index} >wip</span>;
+            return <span key={index} >{Math.floor(Math.random()*100000)}</span>;
           })}
         </motion.span>
         <motion.span
@@ -112,7 +113,7 @@ function Header() {
           className="text-[15px] flex justify-between font-black leading-[15px] w-full absolute"
         >
           {new Array(Math.floor(width / 65)).fill(null).map((_, index) => {
-            return <span key={index} >wip</span>;
+            return <span key={index} >{Math.floor(Math.random()*100000)}</span>;
           })}
         </motion.span>
       </motion.div>
