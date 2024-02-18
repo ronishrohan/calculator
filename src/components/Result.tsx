@@ -41,7 +41,7 @@ function Result({ mouse, offset }) {
             <motion.button
               initial={{scale :0}}
               animate={{scale :1}}
-              
+              transition={{duration: 0.4, type: "tween", ease: "anticipate"}}
               onClick={() =>
                 navigator.clipboard.writeText(
                   resultsData[resultsData.length - 1]
@@ -75,7 +75,7 @@ function Result({ mouse, offset }) {
                     className="flex gap-4 flex-row font-extrabold items-baseline"
                   >
                     <div className="text-[#505050]">{result}</div>
-                    <div className="text-[#3a3a3a] text-[12px]">
+                    <div className="text-[#4d4d4d] text-[16px]">
                       {Array.from(calcsData).reverse().splice(1)[index]}
                     </div>
                   </div>

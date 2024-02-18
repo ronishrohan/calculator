@@ -2,6 +2,7 @@ import Scene from "./Scene";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect } from "react";
 import Result from "./Result";
+import Random from "./Random";
 
 const config = { damping: 20 };
 const offsetx2 = 100;
@@ -73,6 +74,7 @@ function Content() {
       id="main-canvas"
       className="h-full w-full flex justify-center items-center relative overflow-hidden "
     >
+      <Random></Random>
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}

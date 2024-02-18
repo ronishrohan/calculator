@@ -13,7 +13,7 @@ import { useMotionValue, useSpring } from "framer-motion";
 import { results } from "../store/calculation";
 import { calcs } from "../store/calculation";
 import { mode } from "../store/cursor";
-
+import { Edges } from "@react-three/drei";
 const initZ = 0.02;
 
 interface ButtonProps {
@@ -30,7 +30,7 @@ const hovered = new MeshStandardMaterial({ color: "#7e7e7e" });
 const hovered_orange = new MeshStandardMaterial({ color: "#704136" });
 
 function Button({ materials, nodes, children, op, func }: ButtonProps) {
-  const changeMode = useSetAtom(mode)
+  const changeMode = useSetAtom(mode);
   const updateCals = useSetAtom(calcs);
   const updateResults = useSetAtom(results);
   const [displayValue, setDisplayValue] = useAtom(display);
@@ -121,11 +121,11 @@ function Button({ materials, nodes, children, op, func }: ButtonProps) {
     <motion.group
       onPointerEnter={() => {
         setHovered(true);
-        changeMode("pointer")
+        changeMode("pointer");
       }}
       onPointerLeave={() => {
         setHovered(false);
-        changeMode("default")
+        changeMode("default");
       }}
       position-z={zPos}
       onPointerDown={() => {
@@ -151,7 +151,9 @@ function Button({ materials, nodes, children, op, func }: ButtonProps) {
             ? material_hovered
             : material
         }
-      />
+      >
+        {(op != "4" && isHovered) &&  <Edges scale={1} position={[0,0,0.04]} color={"#242424"} ></Edges>}
+      </mesh>
 
       <mesh
         castShadow
@@ -169,7 +171,7 @@ function Button({ materials, nodes, children, op, func }: ButtonProps) {
               : materials.white
             : materials.black
         }
-      />
+      >{(op == "4" && isHovered) &&  <Edges scale={1} position={[0,0,0.04]} color={"#242424"} ></Edges>}</mesh>
     </motion.group>
   );
 }
