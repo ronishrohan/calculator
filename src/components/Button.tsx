@@ -11,7 +11,8 @@ import { useAtom, useSetAtom } from "jotai";
 import { display } from "../store/calculation";
 import { useMotionValue, useSpring } from "framer-motion";
 import { results } from "../store/calculation";
-import { calcs } from "../store/calculation"
+import { calcs } from "../store/calculation";
+import { mode } from "../store/cursor";
 
 const initZ = 0.02;
 
@@ -29,14 +30,17 @@ const hovered = new MeshStandardMaterial({ color: "#7e7e7e" });
 const hovered_orange = new MeshStandardMaterial({ color: "#704136" });
 
 function Button({ materials, nodes, children, op, func }: ButtonProps) {
+  const changeMode = useSetAtom(mode)
   const updateCals = useSetAtom(calcs);
-  const updateResults = useSetAtom(results)
+  const updateResults = useSetAtom(results);
   const [displayValue, setDisplayValue] = useAtom(display);
   const material = children == "add" ? materials["black.001"] : materials.white;
   const material_hovered = children == "add" ? hovered_orange : hovered;
 
-
-  const zPos = useSpring(useMotionValue(initZ), {stiffness: 500, damping: 20})
+  const zPos = useSpring(useMotionValue(initZ), {
+    stiffness: 500,
+    damping: 20,
+  });
 
   const audioConfig = {
     volume: 0.7,
@@ -69,9 +73,7 @@ function Button({ materials, nodes, children, op, func }: ButtonProps) {
   }
 
   function handleClick() {
-    playSound();
     if (displayValue == "error") {
-
       setDisplayValue("");
     }
 
@@ -88,10 +90,10 @@ function Button({ materials, nodes, children, op, func }: ButtonProps) {
           } catch {
             res = "error";
           }
-         
+
           setDisplayValue((prev) => res);
-          updateResults(prev => [...prev, res])
-          updateCals(prev => [...prev, displayValue])
+          updateResults((prev) => [...prev, res]);
+          updateCals((prev) => [...prev, displayValue]);
           break;
         case "+":
         case "-":
@@ -117,10 +119,19 @@ function Button({ materials, nodes, children, op, func }: ButtonProps) {
   }
   return (
     <motion.group
-      onPointerEnter={() => setHovered(true)}
-      onPointerLeave={() => setHovered(false)}
+      onPointerEnter={() => {
+        setHovered(true);
+        changeMode("pointer")
+      }}
+      onPointerLeave={() => {
+        setHovered(false);
+        changeMode("default")
+      }}
       position-z={zPos}
-      onPointerDown={()=> zPos.set(-0.01) }
+      onPointerDown={() => {
+        playSound();
+        zPos.set(-0.01);
+      }}
       onPointerUp={() => zPos.set(initZ)}
       onPointerOut={() => zPos.set(initZ)}
     >

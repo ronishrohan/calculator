@@ -3,7 +3,6 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect } from "react";
 import Result from "./Result";
 
-
 const config = { damping: 20 };
 const offsetx2 = 100;
 const offsety2 = 40;
@@ -72,7 +71,7 @@ function Content() {
   return (
     <section
       id="main-canvas"
-      className="h-full w-full flex justify-center items-center relative overflow-hidden"
+      className="h-full w-full flex justify-center items-center relative overflow-hidden "
     >
       <motion.div
         initial={{ scale: 0 }}
@@ -84,12 +83,17 @@ function Content() {
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ delay: 1, duration: 2, ease: "anticipate", type: "tween" }}
+        transition={{
+          delay: 1,
+          duration: 2,
+          ease: "anticipate",
+          type: "tween",
+        }}
         style={{ y: xtrans2, x: ytrans2 }}
       >
         {arrow}
       </motion.div>
-      <Result offset={{x:280, y:-140}} mouse={mouse} ></Result>
+      <Result offset={{ x: 280, y: -140 }} mouse={mouse}></Result>
       <Scene mouse={mouse}></Scene>
     </section>
   );
