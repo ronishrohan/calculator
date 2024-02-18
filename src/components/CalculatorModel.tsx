@@ -4,12 +4,10 @@ Command: npx gltfjsx@6.2.16 .\public\calculator_export.glb -t -s -K
 */
 
 import * as THREE from "three";
-import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, Text } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import Button from "./Button";
-import { useAtomValue } from "jotai";
-import { display } from "../store/calculation";
+import CalculatorDisplay from "./CalculatorDisplay";
 
 
 type GLTFResult = GLTF & {
@@ -70,7 +68,7 @@ type ContextType = Record<
 >;
 
 export function CalculatorModel(props: JSX.IntrinsicElements["group"]) {
-  const displayValue = useAtomValue(display)
+  
   const { nodes, materials } = useGLTF("/calculator_export.glb") as GLTFResult;
   return (
     <group  {...props} dispose={null}>
@@ -95,8 +93,8 @@ export function CalculatorModel(props: JSX.IntrinsicElements["group"]) {
         intensity={1}
       ></pointLight>
       <group>
+        <CalculatorDisplay></CalculatorDisplay>
         <group>
-          <Text fontSize={0.2} font="/fonts/neue-regrade-medium.otf" position={[-0.47,0.6,0.06]} anchorX={"left"} >{displayValue}</Text>
           <mesh
             castShadow
             receiveShadow
@@ -107,7 +105,7 @@ export function CalculatorModel(props: JSX.IntrinsicElements["group"]) {
             castShadow
             receiveShadow
             geometry={nodes.body_2.geometry}
-            material={materials.display}
+            material={new THREE.MeshLambertMaterial({color: "black"})}
           />
           <mesh
             castShadow

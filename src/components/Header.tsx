@@ -13,9 +13,6 @@ function Header() {
     });
 
   }, []);
-  useEffect(() => {
-    console.log(Math.floor(width / 90));
-  }, [width]);
   return (
     <header className="flex-col h-[100px]">
       <motion.div
@@ -34,7 +31,7 @@ function Header() {
           type: "tween",
           ease: [0.85, 0, 0.15, 1],
         }}
-        className="bg-[#161616] z-10 relative w-full h-[85px] overflow-hidden flex text-white font items-center p-5 justify-between"
+        className="bg-[#161616] z-10 relative pointer-events-none select-none w-full h-[85px] overflow-hidden flex text-white font items-center p-5 justify-between"
       >
         <div className="flex text-3xl font-extrabold overflow-hidden leading-[1.8rem]">
           {title.split("").map((char, index) => {
@@ -83,7 +80,7 @@ function Header() {
           type: "tween",
           ease: "anticipate",
         }}
-        className="h-[15px] z-0 bg-orange-500 overflow-hidden relative flex w-max min-w-full items-center overflow-hidden"
+        className="h-[15px] z-0 bg-orange-500 pointer-events-none select-none overflow-hidden relative flex w-max min-w-full items-center overflow-hidden"
       >
         <motion.span
           initial={{ x: "0%" }}

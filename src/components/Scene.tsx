@@ -3,7 +3,7 @@ import { OrbitControls, PerspectiveCamera, Text } from "@react-three/drei";
 import Calculator from "./Calculator";
 function Scene({mouse}) {
   return (
-    <div className="z-20 w-full h-full">
+    <div className="z-20 w-full h-full pointer-events-none absolute">
         <Canvas camera={{ fov: 10}}>
           <PerspectiveCamera makeDefault rotation={[1,0.4,50]} fov={10} position={[0,0,5]} ></PerspectiveCamera>
           <spotLight

@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import React, { useState } from "react";
 import { motion } from "framer-motion-3d";
 import { MeshStandardMaterial, MeshToonMaterial } from "three";
@@ -6,16 +7,20 @@ import sound2 from "/audio/2.wav";
 import sound3 from "/audio/3.wav";
 import sound4 from "/audio/4.wav";
 import useSound from "use-sound";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { display } from "../store/calculation";
+import { useMotionValue, useSpring } from "framer-motion";
+import { results } from "../store/calculation";
+import { calcs } from "../store/calculation"
 
-interface ButtonProps{
-  materials: any,
-  nodes: any,
-  children: string,
-  op: string,
-  func?: string
+const initZ = 0.02;
 
+interface ButtonProps {
+  materials: any;
+  nodes: any;
+  children: string;
+  op: string;
+  func?: string;
 }
 
 const operators = [".", "+", "-", "^", "*", "/"];
@@ -23,10 +28,15 @@ const operators = [".", "+", "-", "^", "*", "/"];
 const hovered = new MeshStandardMaterial({ color: "#7e7e7e" });
 const hovered_orange = new MeshStandardMaterial({ color: "#704136" });
 
-function Button({ materials, nodes, children, op, func } :ButtonProps) {
+function Button({ materials, nodes, children, op, func }: ButtonProps) {
+  const updateCals = useSetAtom(calcs);
+  const updateResults = useSetAtom(results)
   const [displayValue, setDisplayValue] = useAtom(display);
   const material = children == "add" ? materials["black.001"] : materials.white;
   const material_hovered = children == "add" ? hovered_orange : hovered;
+
+
+  const zPos = useSpring(useMotionValue(initZ), {stiffness: 500, damping: 20})
 
   const audioConfig = {
     volume: 0.7,
@@ -60,35 +70,44 @@ function Button({ materials, nodes, children, op, func } :ButtonProps) {
 
   function handleClick() {
     playSound();
-    if(displayValue.length<8){
+    if (displayValue == "error") {
+
+      setDisplayValue("");
+    }
+
+    if (op == "clear") {
+      setDisplayValue("");
+    } else if (op == "delete") {
+      setDisplayValue((prev) => prev.substring(0, prev.length - 1));
+    } else {
       switch (op) {
-        case "clear":
-          setDisplayValue("");
-          break;
-        case "delete":
-          setDisplayValue((prev) => prev.substring(0, prev.length - 1));
-          break;
         case "equal":
           let res = "";
           try {
             res = eval(formatCalc(displayValue)).toString();
           } catch {
-            res = "error"
+            res = "error";
           }
+         
           setDisplayValue((prev) => res);
+          updateResults(prev => [...prev, res])
+          updateCals(prev => [...prev, displayValue])
           break;
         case "+":
         case "-":
         case "^":
         case "*":
         case "/":
-          if (!operators.includes(displayValue.charAt(displayValue.length - 1)) && displayValue.length != 0) {
+          if (
+            !operators.includes(displayValue.charAt(displayValue.length - 1)) &&
+            displayValue.length != 0
+          ) {
             setDisplayValue((prev) => prev + op);
           }
           break;
         case ".":
-          if(displayValue.indexOf(".") == -1){
-            setDisplayValue(prev => prev + ".")
+          if (displayValue.indexOf(".") == -1) {
+            setDisplayValue((prev) => prev + ".");
           }
           break;
         default:
@@ -98,15 +117,21 @@ function Button({ materials, nodes, children, op, func } :ButtonProps) {
   }
   return (
     <motion.group
-      position={[0, 0, 0.01]}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
-      whileTap={{ z: -0.01 }}
+      position-z={zPos}
+      onPointerDown={()=> zPos.set(-0.01) }
+      onPointerUp={() => zPos.set(initZ)}
+      onPointerOut={() => zPos.set(initZ)}
     >
       <mesh
         castShadow
         receiveShadow
-        onClick={() => handleClick()}
+        onClick={() => {
+          if (children != "4") {
+            handleClick();
+          }
+        }}
         geometry={nodes[`button_${children}`].geometry}
         material={
           children == "4"
@@ -120,6 +145,11 @@ function Button({ materials, nodes, children, op, func } :ButtonProps) {
       <mesh
         castShadow
         receiveShadow
+        onClick={() => {
+          if (children == "4") {
+            handleClick();
+          }
+        }}
         geometry={nodes[`button_${children}_1`].geometry}
         material={
           children == "4"
