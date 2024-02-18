@@ -81,7 +81,13 @@ function Button({ materials, nodes, children, op, func }: ButtonProps) {
       setDisplayValue("");
     } else if (op == "delete") {
       setDisplayValue((prev) => prev.substring(0, prev.length - 1));
-    } else {
+    } 
+    else if(op == "+" || op == "-"){
+      if(displayValue.charAt(displayValue.length -1) != "-" && displayValue.charAt(displayValue.length -1) != "+"){
+        setDisplayValue(prev => prev + op)
+      }
+    }
+    else {
       switch (op) {
         case "equal":
           let res = "";
@@ -95,8 +101,6 @@ function Button({ materials, nodes, children, op, func }: ButtonProps) {
           updateResults((prev) => [...prev, res]);
           updateCals((prev) => [...prev, displayValue]);
           break;
-        case "+":
-        case "-":
         case "^":
         case "*":
         case "/":
@@ -152,7 +156,9 @@ function Button({ materials, nodes, children, op, func }: ButtonProps) {
             : material
         }
       >
-        {(op != "4" && isHovered) &&  <Edges scale={1} position={[0,0,0.04]} color={"#242424"} ></Edges>}
+        {op != "4" && isHovered && (
+          <Edges scale={1} position={[0, 0, 0.04]} color={"#242424"}></Edges>
+        )}
       </mesh>
 
       <mesh
@@ -171,7 +177,11 @@ function Button({ materials, nodes, children, op, func }: ButtonProps) {
               : materials.white
             : materials.black
         }
-      >{(op == "4" && isHovered) &&  <Edges scale={1} position={[0,0,0.04]} color={"#242424"} ></Edges>}</mesh>
+      >
+        {op == "4" && isHovered && (
+          <Edges scale={1} position={[0, 0, 0.04]} color={"#242424"}></Edges>
+        )}
+      </mesh>
     </motion.group>
   );
 }
