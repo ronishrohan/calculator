@@ -1,8 +1,9 @@
 import { useTransform } from "framer-motion";
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { results, calcs } from "../store/calculation";
 import { useAtomValue } from "jotai";
+import { icons } from "../util/icons";
 
 function Result({ mouse, offset }) {
   const transX = useTransform(
@@ -22,7 +23,7 @@ function Result({ mouse, offset }) {
       className="absolute flex-col left-[50%] top-[50%] z-50 select-none"
       style={{ x: transY, y: transX }}
     >
-      <div className="text-orange-500 font-extrabold italic text-[22px] leading-[22px] overflow-hidden">
+      <div className="text-orange-500 flex mb-2 font-extrabold italic text-[22px] leading-[22px] pr-2 overflow-hidden">
         <motion.div
           initial={{ y: "100%" }}
           animate={{ y: "0%" }}
@@ -35,6 +36,23 @@ function Result({ mouse, offset }) {
         >
           result
         </motion.div>
+        <AnimatePresence>
+          {resultsData.length > 0 && (
+            <motion.button
+              initial={{scale :0}}
+              animate={{scale :1}}
+              
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  resultsData[resultsData.length - 1]
+                )
+              }
+              className="ml-2 text-[16px] hover:text-orange-700 active:text-orange-200"
+            >
+              {icons.copy}
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
       {resultsData.length > 0 ? (
         <>
